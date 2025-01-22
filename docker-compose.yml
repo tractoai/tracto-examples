@@ -13,6 +13,7 @@ services:
       YT_TOKEN: ${YT_TOKEN}
       YT_PROXY: ${YT_PROXY}
       YT_CONFIG_PATCHES: "{proxy={force_ipv6=%true}}"
+      YT_BASE_LAYER: "ghcr.io/tractoai/examples-jupyter-lab:2025-01-22-01-49-09-d728d6d4b"
 networks:
   ip6net:
     enable_ipv6: true
