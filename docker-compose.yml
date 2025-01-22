@@ -1,0 +1,18 @@
+services:
+  jupyter:
+    image: ghcr.io/tractoai/examples-jupyter-lab:2025-01-22-01-49-09-d728d6d4b
+    networks:
+      - ip6net
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    platform: linux/amd64
+    environment:
+      YT_TOKEN: ${YT_TOKEN}
+      YT_PROXY: ${YT_PROXY}
+      YT_CONFIG_PATCHES: "{proxy={force_ipv6=%true}}"
+networks:
+  ip6net:
+    enable_ipv6: true
