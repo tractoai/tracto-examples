@@ -6,7 +6,7 @@ Welcome to this guide on working with Tracto.ai Jupyter notebooks! These noteboo
 
 This repository contains example Jupyter notebooks showing different use cases and features of Tracto.ai:
 
-- Machine learning examples using tracto.ai and PyTorch
+- Machine learning examples using Tracto.ai and PyTorch
   - Training
   - Inference
 - Data preparation and analysis
@@ -20,7 +20,7 @@ Please refer to the official Docker installation documentation: https://docs.doc
 
 To run the example notebooks:
 
-1. Clone repository `git clone git@github.com:tractoai/tracto-examples.git`
+1. Clone repository `git clone https://github.com/tractoai/tracto-examples.git`
 2. Set required environment variables in your shell (you need access to Tracto.ai platform):
    ```bash
    export YT_TOKEN=<your_token>
