@@ -1,6 +1,6 @@
-# YTsaurus Solutions Guide Notebooks
+# Tracto.ai examples
 
-Welcome to this guide on working with tracto.ai Jupyter notebooks! These notebooks demonstrate how to use Tracto.ai functionality through practical examples.
+Welcome to this guide on working with Tracto.ai Jupyter notebooks! These notebooks demonstrate how to use Tracto.ai functionality through practical examples.
 
 ## Overview
 
