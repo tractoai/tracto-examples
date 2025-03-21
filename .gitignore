@@ -3,3 +3,6 @@ notebooks/.ipython/
 notebooks/.jupyter/
 notebooks/.local/
 notebooks/.npm/
+
+.idea/
+*.pyc
