@@ -9,13 +9,13 @@ from orc_sdk import workflow, task
 
 
 @task(retval_names=["table_path"])
-def generate_table(dir_path: str) -> str:
+def generate_table(dir_path: str, num_rows) -> str:
     table_path = f"{dir_path}/table_{uuid.uuid4()}"
     yt_client = yt.YtClient(config=yt.default_config.get_config_from_env())
     yt_client.create("table", table_path)
     yt_client.write_table(
         table_path,
-        [{"id": str(uuid.uuid4()), "value": random.randint(0, 1000)} for i in range(100)]
+        [{"id": str(uuid.uuid4()), "value": random.randint(0, 1000)} for i in range(num_rows)]
     )
     return table_path
 
@@ -78,7 +78,7 @@ BASE_PATH = os.environ.get("WF_BASE_PATH", "//home/samples/orchestracto/demo-yt"
 @workflow(
     f"{BASE_PATH}/the_workflow",
 )
-def the_workflow(wfro):
+def the_workflow(wfro, num_rows: int = 42):
     working_dir = BASE_PATH
 
     secret_data = dict(
@@ -86,12 +86,12 @@ def the_workflow(wfro):
         value_ref=f"{BASE_PATH}/secrets:my_token",
     )
 
-    gen_table_1_step = generate_table(working_dir).with_secret(**secret_data).with_memory_limit(512 * 1024 * 1024)
+    gen_table_1_step = generate_table(working_dir, num_rows).with_secret(**secret_data).with_memory_limit(512 * 1024 * 1024)
     wfro.register_first_step(gen_table_1_step)
 
     table_1_rand_val_step = add_random_value(gen_table_1_step.outputs.table_path).with_secret(**secret_data)
 
-    gen_table_2_step = generate_table(working_dir).with_secret(**secret_data)
+    gen_table_2_step = generate_table(working_dir, num_rows).with_secret(**secret_data)
     wfro.register_first_step(gen_table_2_step)
 
     table_2_rand_val_step = filter_values(gen_table_2_step.outputs.table_path, 500).with_secret(**secret_data)
